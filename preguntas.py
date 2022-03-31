@@ -12,6 +12,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 import csv
+from collections import Counter
 with open('data.csv', 'r', newline='') as data:
     data_reader=csv.reader(data, delimiter='	')
     list_data=list(data_reader)
@@ -41,7 +42,13 @@ def pregunta_02():
     ]
 
     """
-    return
+    lista=[]
+    length=len(list_data)
+    for i in range(length):
+        lista.append(list_data[i][0])
+        #Counter(list_data[i][0]).most_common(2)
+    #return(lista)
+    return(sorted(Counter(lista).most_common(length)))
 
 
 def pregunta_03():
