@@ -46,8 +46,6 @@ def pregunta_02():
     length=len(list_data)
     for i in range(length):
         lista.append(list_data[i][0])
-        #Counter(list_data[i][0]).most_common(2)
-    #return(lista)
     return(sorted(Counter(lista).most_common(length)))
 
 
