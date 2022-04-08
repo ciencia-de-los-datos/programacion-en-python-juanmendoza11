@@ -11,11 +11,15 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-import csv
 from collections import Counter
+import csv
 with open('data.csv', 'r', newline='') as data:
     data_reader=csv.reader(data, delimiter='\t')
     list_data=list(data_reader)
+
+data=open('data.csv', 'r').readlines()
+data=[i.replace('\n', '') for i in data]
+data=[i.split('\t') for i in data]
 
 
 
@@ -71,7 +75,13 @@ def pregunta_03():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if i[0] not in list(dic.keys()):
+            dic[i[0]]=int(i[1])
+        elif i[0] in list(dic.keys()):
+            dic[i[0]]+=int(i[1])
+    return sorted(list(dic.items()))
 
 
 def pregunta_04():
