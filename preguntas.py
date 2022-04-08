@@ -20,6 +20,11 @@ with open('data.csv', 'r', newline='') as data:
 
 
 def pregunta_01():
+    """
+    Retorne la suma de la segunda columna.
+    Rta/
+    214
+    """
     suma=0
     lenght=len(list_data)
     for i in range(lenght):
