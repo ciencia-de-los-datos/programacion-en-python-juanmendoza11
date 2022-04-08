@@ -106,7 +106,11 @@ def pregunta_04():
     ]
 
     """
-    return
+    lista=[]
+    length=len(list_data)
+    for i in range(length):
+        lista.append(list_data[i][2][5:7])
+    return(sorted(Counter(lista).most_common(len(lista))))
 
 
 def pregunta_05():
