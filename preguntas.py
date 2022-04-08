@@ -14,8 +14,10 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 import csv
 from collections import Counter
 with open('data.csv', 'r', newline='') as data:
-    data_reader=csv.reader(data, delimiter='	')
+    data_reader=csv.reader(data, delimiter='\t')
     list_data=list(data_reader)
+
+
 
 
 
