@@ -162,7 +162,21 @@ def pregunta_06():
     ]
 
     """
-    return
+    lista=[]
+    dic=dict()
+    length=len(data)
+    for i in range(length):
+        lista.extend(data[i][4].split(','))
+        for j in lista:
+            clave=j.split(':')[0]
+            valor=j.split(':')[1]
+            if clave not in list(dic.keys()):
+                dic[clave]=[int(valor)]
+            elif clave in list(dic.keys()):
+                dic[clave].append(int(valor))
+    result=[(k,min(dic[k]),max(dic[k])) for k in dic.keys()]
+    result.sort(key = lambda x: x[0], reverse=False)
+    return result
 
 
 def pregunta_07():
