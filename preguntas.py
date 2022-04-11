@@ -202,10 +202,10 @@ def pregunta_07():
     """
     dic=dict()
     for i in data:
-        if i[1] not in list(dic.keys()):
-            dic[i[1]]=[i[0]]
-        elif i[1] in list(dic.keys()):
-            dic[i[1]].append(i[0])
+        if int(i[1]) not in dic.keys():
+            dic[int(i[1])]=[str(i[0])]
+        else:
+            dic[int(i[1])].append(str(i[0]))
         
     result = list(dic.items())
     result.sort()
