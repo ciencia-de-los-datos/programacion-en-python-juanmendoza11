@@ -295,8 +295,11 @@ def pregunta_10():
 
 
     """
-    return
+    lista = []
+    for i in data:
+        lista.append((i[0], len(i[3].split(',')),len(i[4].split(','))))
 
+    return lista
 
 def pregunta_11():
     """
