@@ -128,7 +128,16 @@ def pregunta_05():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if i[0] not in list(dic.keys()):
+            dic[i[0]]=[int(i[1])]
+        elif i[0] in list(dic.keys()):
+            dic[i[0]].append(int(i[1]))
+    
+    result=[(j,max(dic[j]),min(dic[j])) for j in dic.keys()]
+    result.sort(key = lambda x: x[0], reverse=False)
+    return result
 
 
 def pregunta_06():
