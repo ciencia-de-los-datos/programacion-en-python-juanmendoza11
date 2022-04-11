@@ -269,12 +269,11 @@ def pregunta_09():
     lista=[]
     lista_0=[]
     dic=dict()
-    dic=dict()
     for i in range(len(data)):
         lista.extend(data[i][4].split(','))
     for j in range(len(lista)):
         lista_0.append(lista[j][0:3])
-    
+        
     return dict(sorted(Counter(lista_0).most_common(len(lista_0))))
 
 
