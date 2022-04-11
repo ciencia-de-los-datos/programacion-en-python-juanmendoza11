@@ -234,7 +234,16 @@ def pregunta_08():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if int(i[1]) not in dic.keys():
+            dic[int(i[1])]=[i[0]]
+        else:
+            dic[int(i[1])].append(i[0])
+        
+    result = sorted(list(dic.items()))
+    result = [(j[0], sorted(set(j[1]))) for j in result]
+    return result
 
 
 def pregunta_09():
