@@ -11,17 +11,31 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from collections import Counter
+import csv
+with open('data.csv', 'r', newline='') as data:
+    data_reader=csv.reader(data, delimiter='\t')
+    list_data=list(data_reader)
+
+data=open('data.csv', 'r').readlines()
+data=[i.replace('\n', '') for i in data]
+data=[i.split('\t') for i in data]
+
+
+
 
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
     Rta/
     214
-
     """
-    return
+    suma=0
+    lenght=len(list_data)
+    for i in range(lenght):
+        suma+=int(list_data[i][1])
+    return(suma)
 
 
 def pregunta_02():
@@ -39,7 +53,11 @@ def pregunta_02():
     ]
 
     """
-    return
+    lista=[]
+    length=len(list_data)
+    for i in range(length):
+        lista.append(list_data[i][0])
+    return(sorted(Counter(lista).most_common(len(lista))))
 
 
 def pregunta_03():
@@ -57,7 +75,13 @@ def pregunta_03():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if i[0] not in list(dic.keys()):
+            dic[i[0]]=int(i[1])
+        elif i[0] in list(dic.keys()):
+            dic[i[0]]+=int(i[1])
+    return sorted(list(dic.items()))
 
 
 def pregunta_04():
@@ -82,7 +106,11 @@ def pregunta_04():
     ]
 
     """
-    return
+    lista=[]
+    length=len(list_data)
+    for i in range(length):
+        lista.append(list_data[i][2][5:7])
+    return(sorted(Counter(lista).most_common(len(lista))))
 
 
 def pregunta_05():
@@ -100,7 +128,16 @@ def pregunta_05():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if i[0] not in list(dic.keys()):
+            dic[i[0]]=[int(i[1])]
+        elif i[0] in list(dic.keys()):
+            dic[i[0]].append(int(i[1]))
+    
+    result=[(j,max(dic[j]),min(dic[j])) for j in dic.keys()]
+    result.sort(key = lambda x: x[0], reverse=False)
+    return result
 
 
 def pregunta_06():
@@ -125,7 +162,21 @@ def pregunta_06():
     ]
 
     """
-    return
+    lista=[]
+    dic=dict()
+    length=len(data)
+    for i in range(length):
+        lista.extend(data[i][4].split(','))
+        for j in lista:
+            clave=j.split(':')[0]
+            valor=j.split(':')[1]
+            if clave not in list(dic.keys()):
+                dic[clave]=[int(valor)]
+            elif clave in list(dic.keys()):
+                dic[clave].append(int(valor))
+    result=[(k,min(dic[k]),max(dic[k])) for k in dic.keys()]
+    result.sort(key = lambda x: x[0], reverse=False)
+    return result
 
 
 def pregunta_07():
@@ -149,7 +200,16 @@ def pregunta_07():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if int(i[1]) not in dic.keys():
+            dic[int(i[1])]=[str(i[0])]
+        else:
+            dic[int(i[1])].append(str(i[0]))
+        
+    result = list(dic.items())
+    result.sort()
+    return result
 
 
 def pregunta_08():
@@ -174,7 +234,16 @@ def pregunta_08():
     ]
 
     """
-    return
+    dic=dict()
+    for i in data:
+        if int(i[1]) not in dic.keys():
+            dic[int(i[1])]=[i[0]]
+        else:
+            dic[int(i[1])].append(i[0])
+        
+    result = sorted(list(dic.items()))
+    result = [(j[0], sorted(set(j[1]))) for j in result]
+    return result
 
 
 def pregunta_09():
@@ -197,7 +266,15 @@ def pregunta_09():
     }
 
     """
-    return
+    lista=[]
+    lista_0=[]
+    dic=dict()
+    for i in range(len(data)):
+        lista.extend(data[i][4].split(','))
+    for j in range(len(lista)):
+        lista_0.append(lista[j][0:3])
+        
+    return dict(sorted(Counter(lista_0).most_common(len(lista_0))))
 
 
 def pregunta_10():
@@ -218,8 +295,11 @@ def pregunta_10():
 
 
     """
-    return
+    lista = []
+    for i in data:
+        lista.append((i[0], len(i[3].split(',')),len(i[4].split(','))))
 
+    return lista
 
 def pregunta_11():
     """
@@ -239,7 +319,18 @@ def pregunta_11():
 
 
     """
-    return
+    
+    diccionario = {}
+    for i in data:
+        for a in i[3].split(','):
+            if a in diccionario.keys():
+               diccionario[a] = diccionario[a] + int(i[1])
+            else:
+                diccionario[a] = int(i[1])
+    
+    resultado = list(diccionario.items())
+
+    return dict(sorted(resultado, key=lambda tup: tup[0]))
 
 
 def pregunta_12():
@@ -257,4 +348,13 @@ def pregunta_12():
     }
 
     """
-    return
+    diccionario = {}
+    for i in data:
+        c = i[4].split(',')
+        if i[0] in diccionario.keys():
+            diccionario[i[0]] = diccionario[i[0]] + sum([int(e.split(':')[1]) for e in c])
+        else:
+            diccionario[i[0]] = sum([int(e.split(':')[1]) for e in c])
+    resultado = list(diccionario.items())
+    resultado = dict(sorted(resultado, key=lambda tup: tup[0]))
+    return resultado
