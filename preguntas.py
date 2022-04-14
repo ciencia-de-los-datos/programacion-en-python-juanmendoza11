@@ -348,4 +348,13 @@ def pregunta_12():
     }
 
     """
-    return
+    diccionario = {}
+    for i in data:
+        c = i[4].split(',')
+        if i[0] in diccionario.keys():
+            diccionario[i[0]] = diccionario[i[0]] + sum([int(e.split(':')[1]) for e in c])
+        else:
+            diccionario[i[0]] = sum([int(e.split(':')[1]) for e in c])
+    resultado = list(diccionario.items())
+    resultado = dict(sorted(resultado, key=lambda tup: tup[0]))
+    return resultado
