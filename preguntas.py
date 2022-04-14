@@ -320,7 +320,17 @@ def pregunta_11():
 
     """
     
-    return
+    diccionario = {}
+    for i in data:
+        for a in i[3].split(','):
+            if a in diccionario.keys():
+               diccionario[a] = diccionario[a] + int(i[1])
+            else:
+                diccionario[a] = int(i[1])
+    
+    resultado = list(diccionario.items())
+
+    return dict(sorted(resultado, key=lambda tup: tup[0]))
 
 
 def pregunta_12():
